@@ -22,7 +22,7 @@ if __name__ == '__main__':
     if not os.path.exists(data_dir):
         print("images not found, donwloading...")
         archive = 'awa2.tmp.zip'
-        os.system("wget http://cvml.ist.ac.at/AwA2/AwA2-base.zip -O %s" % archive)
+        os.system("wget http://cvml.ist.ac.at/AwA2/AwA2-data.zip -O %s" % archive)
         print("extracting...")
         os.system("unzip -q %s" % archive)
         os.remove(archive)
