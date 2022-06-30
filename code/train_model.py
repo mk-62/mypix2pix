@@ -10,7 +10,8 @@ from code.models import PatchGAN
 from tqdm import tqdm
 
 def train_model(train_data, valid_data, epochs, batch_size,
-                    log_dir, log_rate, log_samples, gf, df, noise, lr):
+                    log_dir, log_rate, log_samples, dump_rate,
+                    gf, df, noise, lr):
     #init device
     if torch.cuda.is_available():
         device = 'cuda:0'
@@ -24,6 +25,7 @@ def train_model(train_data, valid_data, epochs, batch_size,
         for entry in it:
             islog = entry.is_file() and (
                 entry.name.startswith('val_epoch_') and entry.name.endswith('.jpg') or
+                entry.name.startswith('dump_epoch_') and entry.name.endswith('.pth') or
                 entry.name.startswith('log.txt'))
             if islog:
                 os.remove(os.path.join(log_dir,entry.name))
@@ -102,7 +104,7 @@ def train_model(train_data, valid_data, epochs, batch_size,
         losses_d.append(np.mean(loss_d_per_epoch))
 
         #render samples log
-        if epoch % log_rate == 0:
+        if (epoch+1) % log_rate == 0:
             generator.eval()
             with torch.no_grad():
                 validbatch = next(iter(valid_load))
@@ -113,6 +115,9 @@ def train_model(train_data, valid_data, epochs, batch_size,
                 images = transform((images.cpu()*stats[1][0]+stats[0][0]).clamp(min=0, max=1))
                 for i in range(images.shape[0]):
                     write_jpeg(images[i],os.path.join(log_dir,'val_epoch_%04d_%02d.jpg' % (epoch+1,i+1)))
+        if (epoch+1) % dump_rate == 0:
+            generator.eval()
+            torch.save(generator.state_dict(),os.path.join(log_dir,'dump_epoch_%04d.pth' % (epoch+1)))
 
         #noise_power = noise_power * 0.999    
         print("epoch %d from %d: loss_g=%f loss_d=%f" % (epoch+1, epochs, losses_g[-1], losses_d[-1]))
