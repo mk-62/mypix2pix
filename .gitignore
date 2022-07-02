@@ -1,6 +1,2 @@
 __pycache__
 *-workspace
-*.pth
-/data/*
-/test/*
-/log/*

@@ -9,40 +9,14 @@ Model receives 256x512 pixel pairs of images consisting of a contour and a
 sample as input, and a 256x512 pixel pair consisting of an image and a sample
 predicted by the contour is created at the output.
 
-![one](animal_000001.jpg) &rarr; ![too](val_000001.jpg)
+![one](e2stest_in.jpg) &rarr; ![too](e2stest_out.jpg)
 
 ## Model trained on [Animals with attributes 2](http://cvml.ist.ac.at/AwA2/) based dataset
 Model receives 256x512 pixels input pairs consisting of a black-and-white
 image and its color sample, the output creates a 256x512 pixels pair consisting
-of a neural network-colored image and its sample.
+of a neural network-colored image and its sample. [More samples...](./test/)
 
-![one](animal_000001.jpg) &rarr; ![too](val_000001.jpg)
-
-
-# Test
-
-```bash
-python3 test.py --test_count 100 --name edges2shoes --model e2s.pth
-python3 test.py --shuffle 0 --name animals --model ans.pth
-```
-
-Parameters:
-
-**name** : dataset name
-
-**data_root** : path to the datasets directory (default ./data)
-
-**batch_size** : test batch size (default 64)
-
-**test_dir** : path to the test files directory (default ./test)
-
-**test_count** : maximum number of test images generated (default all possible)
-
-**shuffle** : test images sequence shuffle (default 1)
-
-**model** : input generator data file name (default generator.pth)
-
-**gpu** : gpu number (default 0)
+![one](anstest_in.jpg) &rarr; ![too](anstest_out.jpg)
 
 
 # Load 'edges2shoes' based on [UT Zappos50K](http://vision.cs.utexas.edu/projects/finegrained/utzap50k/) dataset
@@ -105,10 +79,37 @@ Parameters:
 
 **log_dir** : path to the log files directory (default ./log)
 
-**log_rate** : rate by issuing samples by epochs (default 1)
+**log_rate** : rate by issuing samples per epochs (default 1)
 
 **log_samples** : number of samples per logging epoch (default 5)
 
+**dump_rate** : model dump rate per epochs (default 0)
+
 **model** : output generator data file name (default generator.pth)
+
+**gpu** : gpu number (default 0)
+
+# Test
+
+```bash
+python3 test.py --test_count 100 --name edges2shoes --model e2s.pth
+python3 test.py --shuffle 0 --name animals --model ans.pth
+```
+
+Parameters:
+
+**name** : dataset name
+
+**data_root** : path to the datasets directory (default ./data)
+
+**batch_size** : test batch size (default 64)
+
+**test_dir** : path to the test files directory (default ./test)
+
+**test_count** : maximum number of test images generated (default all possible)
+
+**shuffle** : test images sequence shuffle (default 1)
+
+**model** : input generator data file name (default generator.pth)
 
 **gpu** : gpu number (default 0)

@@ -18,7 +18,7 @@ if __name__ == '__main__':
     p.add_argument('--log_dir', default='./log')
     p.add_argument('--log_rate', default=1, type=int)
     p.add_argument('--log_samples', default=5, type=int)
-    p.add_argument('--dump_rate', default=5, type=int)
+    p.add_argument('--dump_rate', default=0, type=int)
     p.add_argument('--model', default='generator.pth')
     p.add_argument('--gpu', default=0, type=int)
     args = p.parse_args()
