@@ -1,6 +1,6 @@
 # Pix2pix final project implementation
 
-This project contains a **pix2pix** neural network implementation, 
+This project contains a custom [**pix2pix**](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix) neural network implementation, 
 loading scripts and trained models for two demo datasets. The code
 was written by Aleksey Yakovlev (StepikId: **460409082**).
 
